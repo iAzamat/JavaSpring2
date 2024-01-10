@@ -69,7 +69,12 @@
 <!--            <scope>provided</scope>-->
             <scope>compile</scope>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.11</version>
+        </dependency>
 
 
     </dependencies>
@@ -77,6 +82,19 @@
     <build>
         <finalName>ROOT</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -117,7 +135,7 @@
                         <goals>
                             <goal>compile</goal>
                         </goals>
-                        <phase>validate</phase>
+<!--                        <phase>validate</phase>-->
                     </execution>
                 </executions>
             </plugin>
@@ -125,7 +143,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
-                <configuration>
+<!--                <configuration>-->
 <!--                    <includes>-->
 <!--                        <include>*Tes.java</include>-->
 <!--                        <include>*Test.java</include>-->
@@ -133,8 +151,55 @@
 <!--                    </includes>-->
 <!--                    <skip>true</skip>-->
 <!--                    <skipTests>true</skipTests>-->
-                </configuration>
+<!--                </configuration>-->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.0.0-M1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>generate-jacoco-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+<!--M2_HOME/conf-->
+<!--~/.m2/settings.xml-->
+<!--    <distributionManagement>-->
+<!--        <snapshotRepository>-->
+<!--            <id>nexus</id>-->
+<!--            <url>URL</url>-->
+<!--        </snapshotRepository>-->
+<!--        <repository>-->
+<!--            <id>nexus</id>-->
+<!--            <url>URL2</url>-->
+<!--        </repository>-->
+<!--    </distributionManagement>-->
 </project>

@@ -46,7 +46,7 @@ public class App extends HttpServlet {
     }
 
     public static void main(String[] args) {
-        Supplier<String> s = () -> "Hello World";
+        Supplier<String> s = () -> "Hello World!";
         System.out.println(s.get());
     }
 
