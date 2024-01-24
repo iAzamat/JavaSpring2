@@ -16,6 +16,15 @@ public class LibraryRepository {
         }
     }
 
+    public static Book getBookById(Long id) {
+        for (Book book : bookList) {
+            if (book.getId() == id) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Book> getBookList() {
         return bookList;
     }
