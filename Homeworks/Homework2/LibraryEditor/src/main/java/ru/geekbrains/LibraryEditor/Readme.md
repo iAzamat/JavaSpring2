@@ -12,3 +12,6 @@ application/json" -d '{
 "completed":false}'
 http://localhost/api/tasks
 
+docker build -t my-app .
+docker run -p 80:80 my-app
+
