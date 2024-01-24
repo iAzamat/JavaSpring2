@@ -7,18 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-//@Controller
-//@RequestMapping("/api")
+//@RestController
+@Controller
+@RequestMapping("/api")
 public class LibraryController {
-
-    //@GetMapping("/")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home() {
-        return LibraryService.update();
-    }
-
-    @RequestMapping(value = "/api/books/items", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/items", method = RequestMethod.GET)
     public ResponseEntity<List<Book>> getItems(
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "10") int size) {
@@ -30,7 +23,7 @@ public class LibraryController {
         }
     }
 
-    @RequestMapping(value = "/api/books/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     public ResponseEntity<Book> getItem(@PathVariable("id") Long id) {
         Book book = LibraryService.getBookById(id);
         if (book == null) {
@@ -41,21 +34,21 @@ public class LibraryController {
     }
 
     //@PostMapping("/api/books/add")
-    @RequestMapping(value = "/api/books/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/books/add", method = RequestMethod.POST)
     public ResponseEntity<String> addBook(@RequestBody Book book) {
         LibraryService.add(book);
         return new ResponseEntity<>("Книга успешно добавлена", HttpStatus.CREATED);
     }
 
     //    @DeleteMapping("/api/books/delete/{id}")
-    @RequestMapping(value = "/api/books/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/books/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteBook(@PathVariable("id") Long id) {
         LibraryService.delete(id);
         return new ResponseEntity<>("Книга c id: " + id + " успешно удалена", HttpStatus.OK);
     }
 
     //    @PutMapping("/api/books/update/{id}")
-    @RequestMapping(value = "/api/books/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/books/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<String> updateBook(@PathVariable("id") Long id, @RequestBody Book book) {
         LibraryService.change(id, book);
         return new ResponseEntity<>("Книга c id: " + id + " успешно обновлена", HttpStatus.OK);
