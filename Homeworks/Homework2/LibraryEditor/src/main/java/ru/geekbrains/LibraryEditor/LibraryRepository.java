@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 @Scope("singleton")
@@ -50,6 +51,19 @@ public class LibraryRepository {
                 Book.counter = Book.counter - 1;
                 break;
             }
+        }
+    }
+
+    public static List<Book> getItemsFromDatabase(int page, int size) {
+        if (page <= 0) {
+            return null;
+        } else {
+            int startIndex = size * (page - 1);
+            return bookList.
+                    stream().
+                    skip(startIndex).
+                    limit(size).
+                    toList();
         }
     }
 }

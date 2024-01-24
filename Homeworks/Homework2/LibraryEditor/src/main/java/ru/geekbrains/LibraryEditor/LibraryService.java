@@ -2,6 +2,8 @@ package ru.geekbrains.LibraryEditor;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LibraryService {
     public static String delete(long id) {
@@ -25,5 +27,9 @@ public class LibraryService {
 
     public static Book getBookById(Long id) {
         return LibraryRepository.getBookById(id);
+    }
+
+    public static List<Book> getItemsFromDatabase(int page, int size) {
+        return LibraryRepository.getItemsFromDatabase(page, size);
     }
 }

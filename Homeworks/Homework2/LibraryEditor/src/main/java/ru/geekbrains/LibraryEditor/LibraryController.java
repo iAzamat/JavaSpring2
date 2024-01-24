@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 //@Controller
 //@RequestMapping("/api")
@@ -14,6 +16,18 @@ public class LibraryController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return LibraryService.update();
+    }
+
+    @RequestMapping(value = "/api/books/items", method = RequestMethod.GET)
+    public ResponseEntity<List<Book>> getItems(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
+        List<Book> items = LibraryService.getItemsFromDatabase(page, size);
+        if (items == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(items, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/api/books/{id}", method = RequestMethod.GET)
