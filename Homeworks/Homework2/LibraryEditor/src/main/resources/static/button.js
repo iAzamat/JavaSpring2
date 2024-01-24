@@ -3,7 +3,7 @@ function handleChange(bookId) {
     if (bookName.trim() === '') {
         alert('Пожалуйста, введите название книги');
     } else {
-        fetch('/api/books/update/' + bookId, {
+        fetch('/api/books/' + bookId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ function handleChange(bookId) {
 }
 
 function handleDelete(bookId) {
-    fetch('/api/books/delete/' + bookId, {
+    fetch('/api/books/' + bookId, {
         method: 'DELETE',
     })
         .then(response => {
@@ -36,7 +36,7 @@ function handleAdd() {
     if (bookName.trim() === '') {
         alert('Пожалуйста, введите название книги');
     } else {
-        fetch('/api/books/add', {
+        fetch('/api/books', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
